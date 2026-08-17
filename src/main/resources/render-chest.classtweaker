@@ -1,0 +1,9 @@
+classTweaker v2 official
+
+accessible	class	net/minecraft/client/renderer/rendertype/RenderSetup$TextureBinding
+
+inject-interface	net/minecraft/client/renderer/LevelRenderer	net/azureaaron/renderchest/impl/injected/EntitySubmitMarker
+inject-interface	net/minecraft/client/renderer/rendertype/RenderType	net/azureaaron/renderchest/impl/injected/CustomOutlineRenderTypeHolder
+inject-interface	net/minecraft/client/renderer/feature/ItemFeatureRenderer$Submit	net/azureaaron/renderchest/impl/injected/CustomOutlineMarker
+inject-interface	net/minecraft/client/renderer/feature/FeatureRenderDispatcher$PreparedFrame	net/azureaaron/renderchest/impl/injected/CustomOutlinePhaseExecutor
+inject-interface	net/minecraft/client/renderer/SubmitNodeCollection	net/azureaaron/renderchest/impl/injected/CustomOutlinePhaseHolder

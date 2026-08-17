@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "render-chest",
+	"version": "${version}",
+	"name": "Render Chest",
+	"description": "Render Chest is the best rendering library with features you can't get anywhere else!",
+	"authors": [
+		"AzureAaron"
+	],
+	"contact": {
+		"homepage": "https://azureaaron.net/",
+		"sources": "https://github.com/AzureAaron/RenderChest"
+	},
+	"license": "Apache-2.0",
+	"icon": "assets/render-chest/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"net.azureaaron.renderchest.impl.RenderChest"
+		]
+	},
+	"mixins": [
+		"render-chest.mixins.json"
+	],
+	"accessWidener": "render-chest.classtweaker",
+	"depends": {
+		"fabricloader": ">=0.19.3",
+		"minecraft": "~26.2",
+		"java": ">=25",
+		"fabric-api": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"badges": [
+				"library"
+			],
+			"update_checker": false
+		}
+	}
+}

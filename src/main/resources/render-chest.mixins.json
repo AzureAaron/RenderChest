@@ -1,0 +1,24 @@
+{
+	"required": true,
+	"package": "net.azureaaron.renderchest.mixins",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"EntityRendererMixin",
+		"FeatureRenderDispatcherPreparedFrameMixin",
+		"GameRendererMixin",
+		"ItemFeatureRendererMixin",
+		"ItemFeatureRendererSubmitMixin",
+		"LevelExtractorMixin",
+		"LevelRendererMixin",
+		"PreparedRenderTypeMixin",
+		"RenderSetupAccessor",
+		"RenderTypeMixin",
+		"SubmitNodeCollectionMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

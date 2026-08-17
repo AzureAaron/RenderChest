@@ -1,0 +1,20 @@
+{
+	"schemaVersion": 1,
+	"id": "render-chest-testmod",
+	"version": "1.0.0",
+	"name": "Render Chest Test Mod",
+	"description": "Test mod for Render Chest.",
+	"authors": [
+		"AzureAaron"
+	],
+	"license": "Apache-2.0",
+	"environment": "client",
+	"entrypoints": {
+		"client": [
+			"net.azureaaron.renderchest.test.RenderChestTestMod"
+		]
+	},
+	"mixins": [
+		"render-chest-testmod.mixins.json"
+	]
+}
