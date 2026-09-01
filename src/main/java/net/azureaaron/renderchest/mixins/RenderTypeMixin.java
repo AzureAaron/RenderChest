@@ -24,9 +24,9 @@ import net.minecraft.util.Util;
 @Mixin(RenderType.class)
 class RenderTypeMixin implements CustomOutlineRenderTypeHolder {
 	@Unique
-	private static final BiFunction<Identifier, Boolean, RenderType> OUTLINE_DEPTH = Util.memoize(
+	private static final BiFunction<Identifier, Boolean, RenderType> CUSTOM_OUTLINE = Util.memoize(
 			((texture, cullState) -> RenderType.create(
-					"Render Chest outline depth",
+					"Render Chest custom outline",
 					RenderSetup.builder(cullState ? RenderChestPipelines.CUSTOM_OUTLINE_CULL : RenderChestPipelines.CUSTOM_OUTLINE_NO_CULL)
 					.withTexture("Sampler0", texture)
 					.setOutputTarget(OutputTarget.OUTLINE_TARGET)
@@ -38,13 +38,13 @@ class RenderTypeMixin implements CustomOutlineRenderTypeHolder {
 	private @Nullable Optional<RenderType> customOutline;
 
 	@Inject(method = "<init>", at = @At("RETURN"))
-	private void renderChest$initOutlineDepthRenderType(CallbackInfo ci, @Local(name = "state") RenderSetup state) {
+	private void renderChest$initCustomOutlineRenderType(CallbackInfo ci, @Local(name = "state") RenderSetup state) {
 		RenderSetupAccessor accessor = (RenderSetupAccessor) (Object) state;
 		this.customOutline = accessor.getOutlineProperty() == RenderSetup.OutlineProperty.AFFECTS_OUTLINE ? accessor.getTextures()
 				.values()
 				.stream()
 				.findFirst()
-				.map(texture -> OUTLINE_DEPTH.apply(texture.location(), accessor.getPipeline().isCull()))
+				.map(texture -> CUSTOM_OUTLINE.apply(texture.location(), accessor.getPipeline().isCull()))
 				: Optional.empty();
 	}
 

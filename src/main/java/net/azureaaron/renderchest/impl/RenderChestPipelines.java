@@ -15,10 +15,10 @@ public final class RenderChestPipelines {
 			.withDepthStencilState(new DepthStencilState(CompareOp.GREATER_THAN_OR_EQUAL, false))
 			.buildSnippet();
 	public static final RenderPipeline CUSTOM_OUTLINE_CULL = RenderPipelines.register(RenderPipeline.builder(RenderPipelines.OUTLINE_SNIPPET, CUSTOM_OUTLINE_SNIPPET)
-			.withLocation(RenderChest.id("custom_outline_depth_cull"))
+			.withLocation(RenderChest.id("custom_outline_cull"))
 			.build());
 	public static final RenderPipeline CUSTOM_OUTLINE_NO_CULL = RenderPipelines.register(RenderPipeline.builder(RenderPipelines.OUTLINE_SNIPPET, CUSTOM_OUTLINE_SNIPPET)
-			.withLocation(RenderChest.id("custom_outline_depth_no_cull"))
+			.withLocation(RenderChest.id("custom_outline_no_cull"))
 			.withCull(false)
 			.build());
 
