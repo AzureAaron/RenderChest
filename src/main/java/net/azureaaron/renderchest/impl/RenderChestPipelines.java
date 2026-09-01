@@ -9,8 +9,8 @@ import net.minecraft.client.renderer.RenderPipelines;
 
 public final class RenderChestPipelines {
 	private static final RenderPipeline.Snippet CUSTOM_OUTLINE_SNIPPET = RenderPipeline.builder()
-			.withVertexShader(RenderChest.id("core/outline"))
-			.withFragmentShader(RenderChest.id("core/outline"))
+			.withVertexShader(RenderChest.id("outline"))
+			.withFragmentShader(RenderChest.id("outline"))
 			.withBindGroupLayout(BindGroupLayouts.FOG)
 			.withDepthStencilState(new DepthStencilState(CompareOp.GREATER_THAN_OR_EQUAL, false))
 			.buildSnippet();
