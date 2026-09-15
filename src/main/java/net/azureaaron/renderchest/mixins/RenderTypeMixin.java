@@ -15,7 +15,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 
 import net.azureaaron.renderchest.impl.RenderChestPipelines;
 import net.azureaaron.renderchest.impl.injected.CustomOutlineRenderTypeHolder;
-import net.minecraft.client.renderer.rendertype.OutputTarget;
 import net.minecraft.client.renderer.rendertype.RenderSetup;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.resources.Identifier;
@@ -29,7 +28,6 @@ class RenderTypeMixin implements CustomOutlineRenderTypeHolder {
 					"Render Chest custom outline",
 					RenderSetup.builder(cullState ? RenderChestPipelines.CUSTOM_OUTLINE_CULL : RenderChestPipelines.CUSTOM_OUTLINE_NO_CULL)
 					.withTexture("Sampler0", texture)
-					.setOutputTarget(OutputTarget.OUTLINE_TARGET)
 					.setOutline(RenderSetup.OutlineProperty.IS_OUTLINE)
 					.createRenderSetup()
 					))

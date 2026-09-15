@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.mojang.renderpearl.api.commands.RenderPass;
 
 import net.azureaaron.renderchest.impl.injected.CustomOutlinePhaseExecutor;
 import net.minecraft.client.renderer.SubmitNodeCollection;
@@ -29,15 +30,15 @@ abstract class FeatureRenderDispatcherPreparedFrameMixin implements CustomOutlin
 	private Map<FeatureRenderPhase<?>, List<?>> groupsByPhase;
 
 	@Shadow
-	public abstract void executePhase(FeatureRenderPhase<?> phase, FeatureFrameContext context);
+	public abstract void executePhase(FeatureRenderPhase<?> phase, FeatureFrameContext context, RenderPass renderPass);
 
 	@Override
-	public void renderChest$executeCustomOutline() {
+	public void renderChest$executeCustomOutline(RenderPass renderPass) {
 		FeatureFrameContext context = Objects.requireNonNull(this.context);
 		SubmitNodeStorage submitNodeStorage = Objects.requireNonNull(this.submitNodeStorage);
 
 		for (SubmitNodeCollection collection : submitNodeStorage.getSubmitsPerOrder().values()) {
-			this.executePhase(collection.renderChest$getCustomOutlinePhase(), context);
+			this.executePhase(collection.renderChest$getCustomOutlinePhase(), context, renderPass);
 		}
 	}
 
