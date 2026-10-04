@@ -3,6 +3,7 @@ package net.azureaaron.renderchest.mixins;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -26,8 +27,8 @@ import net.minecraft.client.renderer.feature.phase.SimpleFeatureRenderPhase;
 import net.minecraft.client.renderer.item.ItemStackRenderState;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.geometry.BakedQuad;
+import net.minecraft.client.renderer.texture.UvMapping;
+import net.minecraft.client.resources.model.geometry.ItemQuads;
 import net.minecraft.util.LightCoordsUtil;
 import net.minecraft.world.item.ItemDisplayContext;
 
@@ -45,24 +46,24 @@ class SubmitNodeCollectionMixin implements CustomOutlinePhaseHolder {
 	}
 
 	@Inject(method = "submitModel", at = @At("RETURN"))
-	private <S> void renderChest$glowModel(CallbackInfo ci, @Local(name = "model") Model<? super S> model, @Local(name = "state") S state, @Local(name = "renderType") RenderType renderType, @Local(name = "sprite") TextureAtlasSprite sprite, @Local(name = "pose") PoseStack.Pose pose) {
+	private <S> void renderChest$glowModel(CallbackInfo ci, @Local(name = "model") Model<? super S> model, @Local(name = "state") S state, @Local(name = "renderType") RenderType renderType, @Local(name = "uvMapping") @Nullable UvMapping uvMapping, @Local(name = "pose") PoseStack.Pose pose) {
 		int customGlowColour = getCustomGlowColour();
 
 		if (customGlowColour != EntityRenderState.NO_OUTLINE) {
 			RenderType outlineRenderType = getCustomGlowRenderType(renderType);
 
 			if (outlineRenderType != null) {
-				this.customOutline.submit(new ModelFeatureRenderer.Submit<>(outlineRenderType, pose, model, state, LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, customGlowColour, sprite, null));
+				this.customOutline.submit(new ModelFeatureRenderer.Submit<>(outlineRenderType, pose, model, state, LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, customGlowColour, uvMapping, null));
 			}
 		}
 	}
 
 	@Inject(method = "submitItem", at = @At("RETURN"))
-	private void renderChest$glowItem(CallbackInfo ci, @Local(name = "displayContext") ItemDisplayContext displayContext, @Local(name = "quads") List<BakedQuad> quads, @Local(name = "pose") PoseStack.Pose pose) {
+	private void renderChest$glowItem(CallbackInfo ci, @Local(name = "displayContext") ItemDisplayContext displayContext, @Local(name = "quads") ItemQuads quads, @Local(name = "pose") PoseStack.Pose pose) {
 		int customGlowColour = getCustomGlowColour();
 
 		if (customGlowColour != EntityRenderState.NO_OUTLINE) {
-			ItemFeatureRenderer.Submit submit = new ItemFeatureRenderer.Submit(pose, displayContext, LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, customGlowColour, ItemStackRenderState.LayerRenderState.EMPTY_TINTS, quads, ItemStackRenderState.FoilType.NONE);
+			ItemFeatureRenderer.Submit submit = new ItemFeatureRenderer.Submit(pose, displayContext, LightCoordsUtil.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, customGlowColour, ItemStackRenderState.LayerRenderState.EMPTY_TINTS, quads.all(), ItemStackRenderState.FoilType.NONE);
 			submit.renderChest$setHasCustomOutline();
 
 			this.customOutline.submit(submit);

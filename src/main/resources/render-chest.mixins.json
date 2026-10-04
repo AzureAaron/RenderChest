@@ -5,12 +5,10 @@
 	"client": [
 		"EntityRendererMixin",
 		"FeatureRenderDispatcherPreparedFrameMixin",
-		"GameRendererMixin",
 		"ItemFeatureRendererMixin",
 		"ItemFeatureRendererSubmitMixin",
 		"LevelExtractorMixin",
 		"LevelRendererMixin",
-		"PreparedRenderTypeMixin",
 		"RenderSetupAccessor",
 		"RenderTypeMixin",
 		"SubmitNodeCollectionMixin"
